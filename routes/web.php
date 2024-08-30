@@ -1,6 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\adminLogin;
+use App\Http\Controllers\API\isLogged;
+
+
+// #############################TEMP LINKS #####################################
+
+use App\Http\Controllers\API\tempSignin;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +22,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', function () {
-    return view("login");
-});
-Route::get('/h', function () {
+Route::get('/', function () {
     return view("index");
 });
+Route::get("/main",function(){
+    return view("main");
+})->name("name");
+Route::post('/Alogin', [adminLogin::class,"adminWebLogin"]);
+Route::post("/singin",[tempSignin::class,"singin"]);
+ROute::post("/isLoged",[isLogged::class,"checkLogin"]);

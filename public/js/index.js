@@ -30,3 +30,41 @@ function login() {
     msignup.style.transition = "transform 1s ease";
     msignup.style.transform = "translateX(100%)";
 }
+
+function submitForm(event) {
+    event.preventDefault();
+
+    let user_email = document.getElementById("email").value;
+    let user_password = document.getElementById("password").value;
+
+    const payload = {
+        email: user_email,
+        password: user_password,
+    };
+
+    // Send the request
+    fetch("/Alogin", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"), // Include CSRF token
+        },
+        body: JSON.stringify(payload),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                console.log(response); // Follow the redirect
+            } else {
+                window.location.href = "/main";
+            }
+        })
+        .then((data) => {
+            // Handle the response data
+            console.log(data);
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+}
