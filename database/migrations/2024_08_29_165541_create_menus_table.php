@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->string("menu_name");
-            $table->string("appetizers");
+            $table->string("menu_name")->unique();
+            $table->string("menu_type");
             
             $table->timestamps();
         });

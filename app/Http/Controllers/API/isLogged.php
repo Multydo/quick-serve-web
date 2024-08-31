@@ -14,7 +14,7 @@ class isLogged extends Controller
 {
     public function checkLogin(Request $request){
 
-        return response()->json(["state" => true]);
+        
         // Retrieve the token from the session
         $data = [
             "key" => "user_token",

@@ -15,6 +15,13 @@ class VerifyCsrfToken extends Middleware
         "/Alogin",
         "/singin",
         "/main",
-        "/isLoged"
+        "/isLoged",
+        "/getMenus",
+        "/setmenu",
+        "/save_menus",
+        "/delete_menu",
+        "/show_items",
+        "/show_items",
+        "/add_new_menu"
     ];
 }

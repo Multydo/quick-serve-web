@@ -136,8 +136,9 @@ function show_menu_items(id, name, price, desc, menu_id) {
     }
     output.innerHTML = form;
 }
-function checkLogin() {
-    fetch("/isLoged", {
+async function checkLogin() {
+    let status;
+    await fetch("/isLoged", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -148,12 +149,17 @@ function checkLogin() {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
+            console.log(data["state"]);
             if (!data["state"]) {
+                status = data["state"];
                 window.location.href = "/";
+            } else {
+                status = data["state"];
             }
         })
         .catch((error) => {
             console.error("Error: ", error);
         });
+
+    return status;
 }

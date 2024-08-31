@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/login.css" />
     <script src="https://cdn.lordicon.com/lordicon.js"></script>
     <script src="../js/login.js"></script>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>Quick Serve</title>
 </head>
