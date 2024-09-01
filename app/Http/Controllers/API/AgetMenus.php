@@ -35,10 +35,13 @@ class AgetMenus extends Controller
         $data = $request->json()->all();
         $new_menu =menu::where("menu_name",$data["old_name"])->first();
         if($new_menu){
-           $new_menu -> menu_name = $data["new_name"];
-        $new_menu -> menu_type = $data["type"];
-        $new_menu->save();
-        return true; 
+            $new_menu -> menu_name = $data["new_name"];
+            $new_menu -> menu_type = $data["type"];
+            $new_menu->save();
+            $oldT_name = $data["old_name"];
+            $newT_name = $data["new_name"];
+            DB::statement("ALTER TABLE $oldT_name RENAME TO $newT_name");
+            return true; 
         }
         else{
             return response()->json($new_menu);
@@ -53,7 +56,10 @@ class AgetMenus extends Controller
         $data = $request->json()->all();
        $del_menu = menu::where("menu_name", $data["name"]);
        if($del_menu){
+        $table_name = $data['name'];
+        DB::statement("DROP TABLE IF EXISTS $table_name");
         $del_menu->delete();
+        
         return true;
        }
         
@@ -88,13 +94,13 @@ class AgetMenus extends Controller
         $new_menu->save();
         $menu_name = $request["menu_name"];
             DB::statement("CREATE TABLE $menu_name (
-        dish_id INT(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-        dish_name VARCHAR(200) UNIQUE NOT NULL,
-        dish_price FLOAT NOT NULL,
-        dish_description VARCHAR(200) NULL
-        3
+                dish_id INT(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                dish_name VARCHAR(200) UNIQUE NOT NULL,
+                dish_price FLOAT NOT NULL,
+                dish_description VARCHAR(200) NULL
         
-    )");
+        
+            )");
         return response()->json(true,201);
     }
    }

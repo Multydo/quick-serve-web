@@ -20,7 +20,7 @@
         <div class="child">
             <div class="header">
                 <h1>Admin Tools</h1>
-                <button>go back</button></form>
+
             </div>
 
             <button class="AdminMenus" id="form_submit" onclick="goMenus()">Menus</button>
@@ -35,6 +35,9 @@
 
         </div>
     </div>
+    <script>
+    checkLogin()
+    </script>
 </body>
 
 </html>

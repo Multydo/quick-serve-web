@@ -22,6 +22,10 @@ class VerifyCsrfToken extends Middleware
         "/delete_menu",
         "/show_items",
         "/show_items",
-        "/add_new_menu"
+        "/add_new_menu",
+        "/show_items/get_items",
+        "/show_items/add_items",
+        "/show_items/delete_items",
+        "/show_items/edit_item"
     ];
 }

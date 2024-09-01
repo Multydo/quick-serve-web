@@ -18,12 +18,12 @@
         <div class="child">
             <div class="header">
                 <h1>items menu</h1>
-                <form method="get" action="/main"><button type="submit">go back</button></form>
+                <form method="get" action="/admin_menus"><button type="submit">go back</button></form>
             </div>
             <div class="topbox">
 
 
-                <button class="" id="" onclick="">Creat new item</button>
+                <button class="" id="" onclick="show_add_items()">Creat new item</button>
 
 
             </div>
@@ -34,6 +34,7 @@
     </div>
     <script>
     checkLogin()
+    getitems()
     </script>
 </body>
 

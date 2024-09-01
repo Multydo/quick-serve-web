@@ -20,7 +20,7 @@
             <div class="header">
                 <h1> Menus list </h1>
 
-                <button class="" id="go_back" onclick=""> go back </button>
+                <form method="get" action="/main"><button type="submit">go back</button></form>
             </div>
             <div class="topbox">
 

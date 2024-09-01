@@ -3,6 +3,7 @@ async function getmenus() {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            Accept: "application/json",
             "X-CSRF-TOKEN": document
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"), // Include CSRF token
@@ -358,30 +359,30 @@ function show_item_items(name, price, desc) {
                 </tr>`;
     for (let i = 0; i < name.length; i++) {
         structure += ` <tr class="menus" id="menu${i}">
- <td>
-      <p class="item_name">${name[i]}</p>
-      </td><td>
-      <p class="item_price">${price[i]}</p>
-       </td><td>
-      <p class="item_desc">${desc[i]}</p>
-       </td><td>
-      <form
-        method="post"
-        action="items.php?action=edititem"
-      >
-        <input type="hidden" value="${name[i]}" name="hiden_values" />
-        <button type="submit" id="menu_control_btn">edit item</button>
-      </form>
-       </td><td>
-      <form
-        method="post"
-        action="items.php?action=deleteitem"
-      >
-        <input type="hidden" value="${name[i]}" name="hiden_values" />
-        <button type="submit" id="delete_menu">Delete item</button>
-      </form>
-       </td>
-    </tr>
+            <td>
+            <p class="item_name">${name[i]}</p>
+            </td><td>
+            <p class="item_price">${price[i]}</p>
+            </td><td>
+            <p class="item_desc">${desc[i]}</p>
+            </td><td>
+            <form
+                method="post"
+        
+            >
+            <input type="hidden" value="${name[i]}" id="hidden_item_name" name="hiden_values" />
+            <button id="menu_control_btn" class="" onclick="show_edit_item('${name[i]}','${price[i]}','${desc[i]}')">edit item</button>
+            </form>
+            </td><td>
+            <form
+                method="post"
+        
+            >
+            <input type="hidden" value="${name[i]}" id="hidden_item_name" name="hiden_values" />
+            <button class="" onclick="show_delete_item('${name[i]}')" id="delete_menu">Delete item</button>
+            </form>
+            </td>
+            </tr>
  
  
  
@@ -390,37 +391,41 @@ function show_item_items(name, price, desc) {
  
  
  
- `;
+            `;
     }
     output.innerHTML = structure;
 }
 
 function show_add_items() {
     let output = document.getElementById("overlay");
-    let structure = `<form method="post" action="items.php?action=add_the_item">
+    let structure = `<form method="post" >
   
 
-                    <input type="text" placeholder="Item Name"  name="itemname">
-                    <input type = "text" placeholder="Item Price" name="itemprice" >
-                    <input type="text" placeholder="Item desc"  name="itemdesc">
-                    <button type="submit" value="Create item">Creat new item</button>
+                    <input type="text" placeholder="Item Name" id="new_item_name" name="itemname">
+                    <input type = "text" placeholder="Item Price" id="new_item_price" name="itemprice" >
+                    <input type="text" placeholder="Item desc" id="new_item_desc" name="itemdesc">
+                    <button class="" id="" onclick="save_new_item()">Creat new item</button>
                 </form>`;
     output.innerHTML = structure;
 }
 
 function show_edit_item(name, price, desc) {
+    event.preventDefault();
     let output = document.getElementById("overlay");
-    let structure = `<form method="post" action="items.php?action=edit_the_item">
+    let structure = `<form method="post" >
   
-<input type="hidden" value="${name}" name="hiden_value">
-                    <input type="text" placeholder="Item Name" value="${name}" name="itemname">
-                    <input type = "text" placeholder="Item Price" value="${price}"name="itemprice" >
-                    <input type="text" placeholder="Item desc" value="${desc}" name="itemdesc">
-                    <button type="submit" value="Create item">Edit Item</button>
+<input type="hidden" value="${name}" id="old_item_name" name="hiden_value">
+                    <input type="text" placeholder="Item Name" value="${name}"  id="itemname">
+                    <input type = "text" placeholder="Item Price" value="${price}" id="itemprice" >
+                    <input type="text" placeholder="Item desc" value="${desc}"  id="itemdesc">
+                    <button id="" class="" onclick=" location.reload()">Cancel</button>
+                    <button id="" class="" onclick="conferm_edit()">Save Item</button>
+                    
                 </form>`;
     output.innerHTML = structure;
 }
 function show_delete_item(name) {
+    event.preventDefault();
     let output = document.getElementById("overlay");
     let structure = `<div class="deletin_aller" id="deletin_aller">
       <h1>Warning!</h1>
@@ -429,12 +434,12 @@ function show_delete_item(name) {
         you want to proceed?
       </p>
       <div class="options">
-        <form method="post" action="items.php">
-          <button type="submit">Cancel</button>
+        <form method="post" >
+          <button class="" id="" onclick="location.reload();">Cancel</button>
         </form>
-        <form method="post" action="items.php?action=confirmdelete">
+        <form method="post" >
           <input type="hidden" value="${name}" name="itemname_delete" />
-          <button type="submit">Confirm Delete</button>
+          <button class="" id="" onclick="conferm_delet('${name}')">Confirm Delete</button>
         </form>
       </div>`;
     output.innerHTML = structure;
@@ -588,6 +593,7 @@ async function save_edit() {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            Accept: "application/json",
             "X-CSRF-TOKEN": document
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"), // Include CSRF token
@@ -622,6 +628,7 @@ async function delete_the_menu() {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            Accept: "application/json",
             "X-CSRF-TOKEN": document
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"), // Include CSRF token
@@ -646,6 +653,7 @@ async function show_items() {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            Accept: "application/json",
             "X-CSRF-TOKEN": document
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"), // Include CSRF token
@@ -679,6 +687,7 @@ async function add_the_menu() {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            Accept: "application/json",
             "X-CSRF-TOKEN": document
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"), // Include CSRF token
@@ -694,4 +703,113 @@ async function add_the_menu() {
         .catch((error) => {
             console.error("error: ", error);
         });
+}
+async function getitems() {
+    await fetch("/show_items/get_items", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "X-CSRF-TOKEN": document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"), // Include CSRF token
+        },
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            let items_name = data.map((data) => data.dish_name);
+            let items_price = data.map((data) => data.dish_price);
+            let items_desc = data.map((data) => data.dish_description);
+            show_item_items(items_name, items_price, items_desc);
+        })
+        .catch((error) => {
+            console.error("error: ", error);
+        });
+}
+
+async function save_new_item() {
+    event.preventDefault();
+    let new_item_name = document.getElementById("new_item_name").value;
+    let new_item_price = document.getElementById("new_item_price").value;
+    let new_item_desc = document.getElementById("new_item_desc").value;
+
+    let payload = {
+        item_name: new_item_name,
+        item_price: new_item_price,
+        item_desc: new_item_desc,
+    };
+
+    await fetch("/show_items/add_items", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "X-CSRF-TOKEN": document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"), // Include CSRF token
+        },
+        body: JSON.stringify(payload),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data) {
+                location.reload();
+            } else {
+                //error message here
+            }
+        })
+        .catch((error) => {
+            console.error("error: ", error);
+        });
+}
+
+async function conferm_delet(name) {
+    event.preventDefault();
+    await fetch("/show_items/delete_items", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "X-CSRF-TOKEN": document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"), // Include CSRF token
+        },
+        body: JSON.stringify(name),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            location.reload();
+        })
+        .catch((error) => {
+            console.error("error: ", error);
+        });
+}
+async function conferm_edit() {
+    event.preventDefault();
+    let old_name = document.getElementById("old_item_name").value;
+    let item_name = document.getElementById("itemname").value;
+    let item_price = document.getElementById("itemprice").value;
+    let item_desc = document.getElementById("itemdesc").value;
+
+    let paylod = {
+        old_name: old_name,
+        item_name: item_name,
+        item_price: item_price,
+        item_desc: item_desc,
+    };
+
+    await fetch("/show_items/edit_item", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "X-CSRF-TOKEN": document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"), // Include CSRF token
+        },
+        body: JSON.stringify(paylod),
+    })
+        .then((response) => response.json())
+        .then((data) => location.reload())
+        .catch(error, console.error("error: ", error));
 }
