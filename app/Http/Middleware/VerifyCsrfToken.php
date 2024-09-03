@@ -26,6 +26,7 @@ class VerifyCsrfToken extends Middleware
         "/show_items/get_items",
         "/show_items/add_items",
         "/show_items/delete_items",
-        "/show_items/edit_item"
+        "/show_items/edit_item",
+        "/user_login",
     ];
 }

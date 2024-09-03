@@ -5,7 +5,7 @@ use App\Http\Controllers\API\adminLogin;
 use App\Http\Controllers\API\isLogged;
 use App\Http\Controllers\API\AgetMenus;
 use App\Http\Controllers\API\ItemsController;
-
+use App\Http\Controllers\API\user_loginController;
 
 
 // #############################TEMP LINKS #####################################
@@ -53,3 +53,5 @@ Route::get("/show_items",function(){
 });
 Route::post("/getMenus",[AgetMenus::class,"get_admin_menus"]);
 Route::post("/setmenu",[tempmakemenu::class,"make_menu"]);
+
+Route::post("/user_login",[user_loginController::class,"user_login"]);
