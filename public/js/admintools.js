@@ -813,3 +813,26 @@ async function conferm_edit() {
         .then((data) => location.reload())
         .catch(error, console.error("error: ", error));
 }
+
+async function getusers() {
+    await fetch(
+        "/users",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "X-CSRF-TOKEN": document
+                    .querySelector('meta[name="csrf-token"]')
+                    .getAttribute("content"), // Include CSRF token
+            },
+        }
+            .then((response) => response.json())
+            .then((data) => {
+                show_users(data["userid"],data["userfname"],data[userlname).",".json_encode($role)."
+            })
+            .catch((error) => {
+                console.error("error: ", error);
+            })
+    );
+}

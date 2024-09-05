@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../js/admintools.js"></script>
+    <script src="../js/functions.js"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Document</title>
 </head>
