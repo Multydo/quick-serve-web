@@ -55,6 +55,10 @@ Route::get("/show_items",function(){
 Route::post("/getMenus",[AgetMenus::class,"get_admin_menus"]);
 Route::post("/setmenu",[tempmakemenu::class,"make_menu"]);
 
+
+Route::get("/users/add_user",function(){
+    return view("adduser");
+});
 Route::post("/users/getUsers",[Ausers::class,"getusers"]);
 Route::get("/users",function (){
     return view("users");

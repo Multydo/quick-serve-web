@@ -11,12 +11,15 @@
 </head>
 
 <body>
+    <div class="overlay" id="overlay">
 
+    </div>
     <div class="mother">
         <div class="child">
             <div class="header">
                 <h1>Users page</h1>
-                <form method="post" action="../admintools.php"><button type="submit">go back</button></form>
+                <button class="" id="" onclick="addUser()">add user</button>
+                <form method="get" action="../main"><button type="submit">go back</button></form>
             </div>
             <div class="box" id="box"></div>
             <div class="outputbox" id="outputbox">
@@ -26,6 +29,7 @@
     </div>
     <script>
     checkLogin()
+    getusers()
     </script>
 </body>
 

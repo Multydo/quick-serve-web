@@ -815,9 +815,56 @@ async function conferm_edit() {
 }
 
 async function getusers() {
-    await fetch(
-        "/users",
-        {
+    await fetch("/users/getUsers", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "X-CSRF-TOKEN": document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"), // Include CSRF token
+        },
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            show_users(
+                data["userid"],
+                data["userfname"],
+                data["userlname"],
+                data["role"]
+            );
+        })
+        .catch((error) => {
+            console.error("error: ", error);
+        });
+}
+
+function addUser() {
+    event.preventDefault();
+    window.location.href = "/users/add_user";
+}
+
+async function signUp() {
+    let adminEmail = document.getElementById("adminEmail").value;
+    let adminPass = document.getElementById("adminPass").value;
+    let fname = document.getElementById("fname").value;
+    let lname = document.getElementById("lname").value;
+    let email = document.getElementById("email").value;
+    let pass1 = document.getElementById("password1").value;
+    let pass2 = document.getElementById("password2").value;
+    let role = document.getElementById("role").value;
+    if (pass1 == pass2) {
+        let info = {
+            admin_email: adminEmail,
+            admin_pass: adminPass,
+            fname: fname,
+            lname: lname,
+            email: email,
+            pass: pass1,
+            role: role,
+        };
+
+        await fetch("/users/add_user", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -826,13 +873,12 @@ async function getusers() {
                     .querySelector('meta[name="csrf-token"]')
                     .getAttribute("content"), // Include CSRF token
             },
-        }
-            .then((response) => response.json())
-            .then((data) => {
-                show_users(data["userid"],data["userfname"],data[userlname).",".json_encode($role)."
-            })
-            .catch((error) => {
-                console.error("error: ", error);
-            })
-    );
+            body: JSON.stringify(info),
+        }).then((response)=>response.json())
+        .then((data)=>{
+            console.log(data),
+        }).catch((error)=>{console.error("Error: ",error)});
+    } else {
+        //error passwords does not match
+    }
 }

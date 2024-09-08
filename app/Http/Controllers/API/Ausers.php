@@ -12,8 +12,8 @@ class Ausers extends Controller
         $is_logged = new isLogged ;
         $state = $is_logged->checkLogin($request);
         if($state){
-            $users = User::select('user_id', 'user_fname', 'user_lname', 'role')->get();
-            $userid = $users->pluck('user_id')->toArray();
+            $users = User::select('id', 'user_fname', 'user_lname', 'role')->get();
+            $userid = $users->pluck('id')->toArray();
             $userfname = $users->pluck('user_fname')->toArray();
             $userlname = $users->pluck('user_lname')->toArray();
             $role = $users->pluck('role')->toArray();
