@@ -24,7 +24,7 @@
             </div>
 
             <button class="AdminMenus" id="form_submit" onclick="goMenus()">Menus</button>
-            <button class="" id="form_submit" onclick="">Users</button>
+            <button class="" id="form_submit" onclick="goUsers()">Users</button>
             <button class="" id="form_submit" onclick="">Orders</button>
             <button class="" id="form_submit" onclick="">Receipts</button>
 
